@@ -49,7 +49,6 @@ def build_model(acti, opti, lr):
     x = Dense(32,activation="relu")(x)
     x = Dense(16,activation="relu")(x)
     x = Dense(16,activation="relu")(x)
-    x = Dense(4,activation="relu")(x)
 
 
     outputs = Dense(1)(x)
