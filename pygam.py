@@ -41,15 +41,17 @@ train_value = df[ '2020-09-01' > df['date'] ]
 x_train1 = train_value.iloc[:,1:].astype('float64')
 y_train1 = train_value['value'].astype('float64').to_numpy()
 
-x_train2 = train_value['temperature'].astype('float64').to_numpy()
+x_train2 = train_value[['temperature','rain','wind','humidity','person']].astype('float64')
 
 from pygam import LinearGAM, s, f
 from pygam.datasets import wage
-x_train2, y_train1 = wage()
+import matplotlib.pyplot as plt
+'''
+# x_train2, y_train1 = wage()
 gam = LinearGAM(s(0) + s(1) + f(2)).fit(x_train2, y_train1)
 gam.summary()
 
-import matplotlib.pyplot as plt
+
 for i, term in enumerate(gam.terms):
     if term.isintercept:
         continue
@@ -62,3 +64,35 @@ for i, term in enumerate(gam.terms):
     plt.plot(XX[:, term.feature], confi, c='r', ls='--')
     plt.title(repr(term))
     plt.show()
+'''
+
+
+# boston = load_boston()
+# df=pd.DataFrame(boston.data, columns=boston.feature_names)
+
+# #使用する変数を選択、正規化
+# X = df[['CRIM', 'ZN','RM', 'AGE', 'DIS', 'LSTAT']]
+# ss = preprocessing.StandardScaler()
+# X_ss = pd.DataFrame(ss.fit_transform(X))
+# X_ss.columns=X.columns
+# y = boston.target
+
+# #trainとtestに分ける
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# https://rmizutaa.hatenablog.com/entry/2019/03/23/201720
+
+from pygam import LinearGAM
+gam = LinearGAM().fit(x_train2, y_train1)
+
+plt.figure(figsize=(12,8))
+for i in range(x_train2.shape[1]):
+    plt.subplot(2,3,i+1)
+    XX = gam.generate_X_grid(term=i)
+    plt.plot(XX[:, i],gam.partial_dependence(term=i, X=XX))
+    plt.plot(XX[:, i], gam.partial_dependence(term=i, X=XX, width=.95)[1],
+                c='r', ls='--')
+    plt.title(x_train2.columns[i])
+plt.show()
+
+
