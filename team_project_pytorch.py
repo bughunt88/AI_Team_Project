@@ -51,6 +51,3 @@ trn_loader = torch.utils.data.DataLoader(df,
                                          shuffle=True)
 
 print(trn_loader)
-
-for data in trn_loader:
-      print("Data: ", data)
