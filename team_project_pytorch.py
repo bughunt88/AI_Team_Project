@@ -57,15 +57,6 @@ val_y  = torch.from_numpy(y_pred_pd.astype(float).values)
 
 batch_size=500
 
-# trn = data_utils.TensorDataset(trn_X, trn_y)
-# trn_loader = data_utils.DataLoader(trn, batch_size=batch_size, shuffle=True)
-
-# val = data_utils.TensorDataset(val_X, val_y)
-# val_loader = data_utils.DataLoader(val, batch_size=batch_size, shuffle=False)
-
-# tmp = next(iter(trn_loader))
-# print(tmp)
-
 # for dictionary batch
 class Dataset(data_utils.Dataset):
    
@@ -86,9 +77,12 @@ val = Dataset(val_X, val_y)
 val_loader = data_utils.DataLoader(val, batch_size=batch_size, shuffle=False)
 
 tmp = next(iter(trn_loader))
-# print(tmp)
+print(tmp)
 
 num_batches = len(trn_loader)
+
+
+
 
 # Build Model
 use_cuda = torch.cuda.is_available()
@@ -136,8 +130,7 @@ for epoch in range(num_epochs):
         if use_cuda:
             trn_X, trn_y = trn_X.cuda(), trn_y.cuda()
         optimizer.zero_grad()
-        trn_pred = model(trn_X.float()) #HERE: why is .float() needed here?
-        # https://discuss.pytorch.org/t/pytorch-why-is-float-needed-here-for-runtimeerror-expected-scalar-type-float-but-found-double/98741
+        trn_pred = model(trn_X.float())
         trn_loss = criterion(trn_pred.float(), trn_y.float())
         trn_loss.backward()
         optimizer.step()
