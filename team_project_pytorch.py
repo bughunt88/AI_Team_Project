@@ -123,6 +123,9 @@ print(num_batches)  #38429
 trn_loss_list = []
 val_loss_list = []
 
+
+
+
 for epoch in range(num_epochs):
     trn_loss_summary = 0.0
     for i, trn in enumerate(trn_loader):
