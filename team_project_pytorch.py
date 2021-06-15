@@ -16,6 +16,9 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 import torch.utils.data as data_utils 
 
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+
 def load_data(query, is_train = True):
     query = query
     db.cur.execute(query)
@@ -55,7 +58,16 @@ trn_y  = torch.from_numpy(y_train_pd.astype(float).values)
 val_X  = torch.from_numpy(x_pred_pd.astype(float).values)
 val_y  = torch.from_numpy(y_pred_pd.astype(float).values)
 
-batch_size=500
+batch_size=2048
+
+trn = data_utils.TensorDataset(trn_X, trn_y)
+trn_loader = data_utils.DataLoader(trn, batch_size=batch_size, shuffle=True)
+
+val = data_utils.TensorDataset(val_X, val_y)
+val_loader = data_utils.DataLoader(val, batch_size=batch_size, shuffle=False)
+
+tmp = next(iter(trn_loader))
+# print(tmp)
 
 # for dictionary batch
 class Dataset(data_utils.Dataset):
@@ -77,39 +89,44 @@ val = Dataset(val_X, val_y)
 val_loader = data_utils.DataLoader(val, batch_size=batch_size, shuffle=False)
 
 tmp = next(iter(trn_loader))
-print(tmp)
+# print(tmp)
 
 num_batches = len(trn_loader)
-
-
-
 
 # Build Model
 use_cuda = torch.cuda.is_available()
 
-class MLPRegressor(nn.Module):
+class Mish(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, x):
+        #inlining this saves 1 second per epoch (V100 GPU) vs having a temp x and then returning x(!)
+        return x *( torch.tanh(F.softplus(x)))
+
+class Regressor(nn.Module):
     
     def __init__(self):
-        super(MLPRegressor, self).__init__()
-        h1 = nn.Linear(47, 50)
-        h2 = nn.Linear(50, 35)
-        h3 = nn.Linear(35, 1)
+        super(Regressor, self).__init__()
+        fc1 = nn.Linear(47, 32)
+        fc2 = nn.Linear(32, 32)
+        fc3 = nn.Linear(32, 16)
+        fc4 = nn.Linear(16, 16)
+        fc5 = nn.Linear(16, 1)
+        batch_norm = nn.BatchNorm1d(32)
         self.hidden = nn.Sequential(
-            h1,
-            nn.Tanh(),
-            h2,
-            nn.Tanh(),
-            h3,
+            fc1, Mish(), batch_norm, fc2, Mish(), fc2, Mish(), fc2, Mish(),
+            fc2, Mish(), fc3, Mish(), fc4, Mish(), fc5,
         )
         if use_cuda:
             self.hidden = self.hidden.cuda()
         
     def forward(self, x):
         o = self.hidden(x)
-        return o.view(-1)
+        return o
 
 #Train model
-model = MLPRegressor()
+model = Regressor()
 
 criterion = nn.MSELoss()
 learning_rate = 1e-3
@@ -123,9 +140,6 @@ print(num_batches)  #38429
 trn_loss_list = []
 val_loss_list = []
 
-
-
-
 for epoch in range(num_epochs):
     trn_loss_summary = 0.0
     for i, trn in enumerate(trn_loader):
@@ -133,7 +147,8 @@ for epoch in range(num_epochs):
         if use_cuda:
             trn_X, trn_y = trn_X.cuda(), trn_y.cuda()
         optimizer.zero_grad()
-        trn_pred = model(trn_X.float())
+        trn_pred = model(trn_X.float()) #HERE: why is .float() needed here?
+        # https://discuss.pytorch.org/t/pytorch-why-is-float-needed-here-for-runtimeerror-expected-scalar-type-float-but-found-double/98741
         trn_loss = criterion(trn_pred.float(), trn_y.float())
         trn_loss.backward()
         optimizer.step()
