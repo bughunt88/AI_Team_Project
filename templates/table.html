@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/map.css') }}">
+
+   <title>서울시 배달 예측량</title>
+ </head>
+ <body>
+  
+	 <div class="content_wrap">
+	
+		<h2><p>서울시 {{subject}} 배달 예측량</p></h2>
+		<div class="content_box">
+			<div class="tab_wrap">
+				<ul class="top_tab">
+					<li class="on">업종별</li>
+					<li>법정동별</li>
+				</ul>
+				<ul class="bottom_tab">
+					<li class="on">분식</li>
+					<li>치킨</li>
+					<li>피자</li>
+					<li>양식</li>
+					<li>일식</li>
+				</ul>
+			</div>
+			<div class="table_wrap">
+				<p>2021.06.01 ~ 2021.06.31 (한달예측)</p>
+				<div class="table_box">
+					<table>
+						<colgroup>
+							<col style="width:33%;">
+							<col style="width:33%;">
+							<col style="width:33%;">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>시간</th>
+								<th>작년주문량</th>
+								<th>예상 주문량</th>
+							</tr>
+							<tr>
+								<td>0시</td>
+								<td>1건</td>
+								<td>1건</td>
+							</tr>
+							<tr>
+								<td>2시</td>
+								<td>1건</td>
+								<td>0건</td>
+							</tr>
+							<tr>
+								<td>3시</td>
+								<td>1건</td>
+								<td>10건</td>
+							</tr>
+							<tr>
+								<td>4시</td>
+								<td>1건</td>
+								<td>11건</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="btn_wrap">		
+				<div class="btn_box">
+					<a href = "{{url_for('home')}}" class="left"><p>목록으로</p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+  
+ </body>
+</html>
