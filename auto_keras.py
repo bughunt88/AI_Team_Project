@@ -135,3 +135,6 @@ chart.plot(y_pred, marker='o', color='blue', label='Actual')
 chart.plot(y_predict, marker='^', color='red', label='Predict')
 plt.legend(loc = 'best') 
 plt.show()
+
+
+# 오토케라스로 우리 데이터 다시 넣고 돌려보자
