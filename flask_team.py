@@ -99,6 +99,6 @@ def view():
     return render_template("table.html", subject = name, data = x_pred, cate = cate)
  
 if __name__=='__main__':
- #app.run(host='0.0.0.0', port=5000, debug=True)
- app.run()
+ app.run(host='0.0.0.0', port=5000, debug=True)
+ #app.run()
 
