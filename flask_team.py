@@ -7,8 +7,7 @@ def load_data(query, is_train = True):
     query = query
     db.cur.execute(query)
     dataset = np.array(db.cur.fetchall())
-
-    db.connect.close()
+    db.cur.close()
 
     return dataset
 
