@@ -90,15 +90,14 @@ def view():
     if cate != "None":
         cate_list += " and category = '" + cate + "' "
 
-    sql = "SELECT date,YEAR,MONTH,day,time,category,dong,value, IFNULL((SELECT VALUE FROM main_data_table AS s WHERE  s.date = DATE_SUB(a.date, INTERVAL 1 YEAR) AND a.month=s.month AND a.time=s.time AND a.category=s.category AND a.dong = s.dong ),0) AS l_value from result_data_table as a where 1"+location + cate_list
+
+    sql = "SELECT a.DATE,a.YEAR,a.MONTH,a.DAY,a.TIME,a.category,a.dong,a.VALUE FROM result_data_table AS a LEFT JOIN main_data_table AS s ON s.date = DATE_SUB(a.date, INTERVAL 1 YEAR) AND a.month=s.month AND a.time=s.time AND a.category=s.category AND a.dong = s.dong  where 1"+location + cate_list
     sql += " order by a.date, a.year, a.month, a.day, a.time asc"
-    print(sql)
     x_pred = load_data(sql)
-    print(x_pred)
 
     return render_template("table.html", subject = name, data = x_pred, cate = cate)
  
 if __name__=='__main__':
- app.run(host='0.0.0.0', port=5000, debug=True)
- #app.run()
+ #app.run(host='0.0.0.0', port=5000, debug=True)
+ app.run()
 
