@@ -82,6 +82,8 @@ def view():
     x_pred = load_data(sql)
     print(x_pred)
 
+    db.connect.clsoe()
+
     return render_template("table.html", subject = name, data = x_pred)
  
 if __name__=='__main__':
