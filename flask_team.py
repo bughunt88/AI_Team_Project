@@ -1,13 +1,17 @@
 from flask import Flask, render_template , request
 import numpy as np
-import db_connect as db
 import pandas as pd
+import pymysql
 
 def load_data(query, is_train = True):
+
+    connect = pymysql.connect(host='mitzy.c7xaixb8f0ch.ap-northeast-2.rds.amazonaws.com', user='mitzy', password='mitzy1234!', db='mitzy',\
+                          charset='utf8')
+    cur = connect.cursor()
     query = query
-    db.cur.execute(query)
-    dataset = np.array(db.cur.fetchall())
-    
+    cur.execute(query)
+    dataset = np.array(cur.fetchall())
+    cur.close()
 
     return dataset
 
@@ -82,8 +86,6 @@ def view():
     print(sql)
     x_pred = load_data(sql)
     print(x_pred)
-
-    db.cur.close()
 
     return render_template("table.html", subject = name, data = x_pred)
  
