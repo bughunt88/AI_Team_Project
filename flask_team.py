@@ -7,7 +7,7 @@ def load_data(query, is_train = True):
     query = query
     db.cur.execute(query)
     dataset = np.array(db.cur.fetchall())
-    db.cur.close()
+    
 
     return dataset
 
@@ -82,6 +82,8 @@ def view():
     print(sql)
     x_pred = load_data(sql)
     print(x_pred)
+
+    db.cur.close()
 
     return render_template("table.html", subject = name, data = x_pred)
  
