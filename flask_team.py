@@ -8,6 +8,8 @@ def load_data(query, is_train = True):
     db.cur.execute(query)
     dataset = np.array(db.cur.fetchall())
 
+    db.connect.close()
+
     return dataset
 
 
@@ -81,8 +83,6 @@ def view():
     print(sql)
     x_pred = load_data(sql)
     print(x_pred)
-
-    db.connect.close()
 
     return render_template("table.html", subject = name, data = x_pred)
  
