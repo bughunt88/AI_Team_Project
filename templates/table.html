@@ -12,6 +12,9 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/map.css') }}">
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/font.css">
+<link rel="stylesheet" type="text/css" href="css/map.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -48,7 +51,7 @@
 			<div class="tab_wrap">
 				<ul class="top_tab">
 					<li class="on" id="dong" onclick="main_onclick(this, 'cate')">업종별</li>
-					<li id="cate"  onclick="main_onclick(this, 'dong')">법정동별</li>
+					
 				</ul>
 				<ul class="bottom_tab cate" >
 					<li onclick="cate_select('0',this);">분식</li>
@@ -98,14 +101,17 @@
 				<div class="table_box">
 					<table>
 						<colgroup>
-							<col style="width:33%;">
-							<col style="width:33%;">
-							<col style="width:33%;">
+							<col style="width:20%;">
+							<col style="width:20%;">
+							<col style="width:20%;">
+							<col style="width:20%;">
+							<col style="width:20%;">
 						</colgroup>
 						<tbody>
 							<tr>
 								<th>날짜</th>
 								<th>시간</th>
+								<th>추가</th>
 								<th>작년주문량</th>
 								<th>예상 주문량</th>
 							</tr>
@@ -113,6 +119,7 @@
 								<tr>
 									<td>{{n[0]}}</td>
 									<td>{{n[4]}}시</td>
+									<td>추가</td>
 									<td>{{n[7]}}건</td>
 									<td>{{n[7]}}건</td>
 								</tr>

@@ -41,17 +41,17 @@ background: -moz-linear-gradient(bottom, #126097 10%,#47c0e6 100%);
 .content_wrap .content_box .map_box p.area_b10{bottom: 220px;left: 820px;}
 .content_wrap .content_box .map_box p.area_b11{bottom: 350px;left: 880px;}
 
-/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+/*¿¹Ãø·® ÆäÀÌÁö*/
 
 .tab_wrap{width:100%;}
 .tab_wrap ul {}
-.tab_wrap ul.top_tab{width:100%;display:flex;margin-bottom:40px;}
-.tab_wrap ul.top_tab li{width:50%;padding:10px 0;font-size:2.8rem ;background:#fff;color:#6a6a6a;text-align:center;cursor:pointer;}
-.tab_wrap ul.top_tab li.on{color:#fff;background:#126097;position:relative;z-index:2}
-.tab_wrap ul.top_tab li.on:after{position:absolute;content:"";width:30px;height:30px;bottom:-10px;left:calc(50% - 15px);background:url('/img/tab_on.png');z-index:1}
-
-
-.tab_wrap ul.bottom_tab li{display:inline-block;font-size:2.2rem ;color:#fff;background:#aeaeae;padding:5px 20px;margin-right:5px;cursor:pointer;}
+.tab_wrap ul.top_tab{width:100%;margin-bottom:20px;margin-top:30px}
+.tab_wrap ul.top_tab li{display:inline-block;padding:0 10px;font-size:3.2rem ;text-align:center;position:relative;}
+.tab_wrap ul.top_tab li.on{color:#47c0e6;}
+/*.tab_wrap ul.top_tab li.on:after{position:absolute;content:"";width:30px;height:30px;bottom:-10px;left:calc(50% - 15px);background:url('../img/tab_on.png');z-index:1}*/
+.tab_wrap ul.top_tab li.on:before{position:absolute;content:""; width:3px ;background: #47c0e6;height:20px;left:0;top:7px}
+.tab_wrap ul.top_tab li.on:after{position:absolute;content:""; width:3px ;background: #47c0e6;height:20px;right:0;top:7px}
+.tab_wrap ul.bottom_tab li{display:inline-block;font-size:2.2rem ;color:#fff;background:#aeaeae;padding:5px 20px;margin-right:5px;cursor:pointer;margin-bottom: 10px;}
 .tab_wrap ul.bottom_tab li:hover{background:#47c0e6;}
 .tab_wrap ul.bottom_tab li.on{ background:#47c0e6;position:relative;}
 .tab_wrap ul.bottom_tab li.on:before{position:absolute;content:'';top:5px;right:10px;width:5px;height:5px;background:#fff;border-radius:10px;}
@@ -77,8 +77,8 @@ background: -moz-linear-gradient(bottom, #126097 10%,#47c0e6 100%);
 .btn_box a:hover p{color:#fff; transition: all 0.3s ease-in-out;}
 .btn_box a:hover p:after{width:100%; transition: all 0.3s ease-in-out;}
 .btn_box a p:before{position: absolute;    content: "";       color: #fff;    font-weight: 600;    top: 15px;     width: 20px;    height: 14px;transition: all 0.3s ease-in-out;}
-.btn_box a.right p:before{ background: url("/img/btn_arrow_w_left.png");  right: 15px; }
-.btn_box a.left p:before{ background: url("/img/btn_arrow_w_left.png");  left: 15px;}
+.btn_box a.right p:before{ background: url("../img/btn_arrow_w_left.png");  right: 15px; }
+.btn_box a.left p:before{ background: url("../img/btn_arrow_w_left.png");  left: 15px;}
 .btn_box a.right:hover p:before{right: 5px; transition: all 0.3s ease-in-out;}
 .btn_box a.left:hover p:before{left: 5px; transition: all 0.3s ease-in-out;}
 
