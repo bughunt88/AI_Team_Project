@@ -28,15 +28,16 @@
 
 	}
 
-	function cate_select(obj,ths){
+	function cate_select(obj,ths,sbj){
 		$(".bottom_tab").find("li").removeClass("on");
 		$(ths).addClass("on");
-	}
+		//window.location = 'http://www.example.com/question';
 
-	function dong_select(obj,ths){
-		$(".bottom_tab").find("li").removeClass("on");
-		$(ths).addClass("on");
-	}
+		var newURL = window.location.protocol + "//" + window.location.host 
+
+		window.location = newURL + "/view?name=" + sbj + "&cate=" +obj
+
+	}	
 
 </script>
 
@@ -50,50 +51,92 @@
 		<div class="content_box">
 			<div class="tab_wrap">
 				<ul class="top_tab">
-					<li class="on" id="dong" onclick="main_onclick(this, 'cate')">업종별</li>
+					<li class="on" id="dong">업종별</li>
 					
 				</ul>
 				<ul class="bottom_tab cate" >
-					<li onclick="cate_select('0',this);">분식</li>
-					<li onclick="cate_select('1',this);">족발/보쌈</li>
-					<li onclick="cate_select('2',this);">치킨</li>
-					<li onclick="cate_select('3',this);">패스트푸드</li>
-					<li onclick="cate_select('4',this);">카페/디저트</li>
-					<li onclick="cate_select('5',this);">돈까스/일식</li>
-					<li onclick="cate_select('6',this);">아시안/양식</li>
-					<li onclick="cate_select('7',this);">한식</li>
-					<li onclick="cate_select('8',this);">도시락</li>
-					<li onclick="cate_select('9',this);">배달전문업체</li>
-					<li onclick="cate_select('10',this);">야식</li>
-					<li onclick="cate_select('11',this);">중식</li>
-					<li onclick="cate_select('12',this);">찜탕</li>
-					<li onclick="cate_select('13',this);">피자</li>
-					<li onclick="cate_select('14',this);">회</li>
-					<li onclick="cate_select('15',this);">심부름</li>
-				</ul>
-				<ul class="bottom_tab dong" style="display:none">
-					<li onclick="dong_select('0',this);">구로구</li>
-					<li onclick="dong_select('1',this);">영등포구</li>
-					<li onclick="dong_select('2',this);">도봉구</li>
-					<li onclick="dong_select('3',this);">성북구</li>
-					<li onclick="dong_select('4',this);">동작구</li>
-					<li onclick="dong_select('5',this);">서대문구</li>
-					<li onclick="dong_select('6',this);">노원구</li>
-					<li onclick="dong_select('7',this);">은평구</li>
-					<li onclick="dong_select('8',this);">마포구</li>
-					<li onclick="dong_select('9',this);">금천구</li>
-					<li onclick="dong_select('10',this);">강서구</li>
-					<li onclick="dong_select('11',this);">양천구</li>
-					<li onclick="dong_select('12',this);">강북구</li>
-					<li onclick="dong_select('13',this);">관악구</li>
-					<li onclick="dong_select('14',this);">송파구</li>
-					<li onclick="dong_select('15',this);">강남구</li>
-					<li onclick="dong_select('16',this);">서초구</li>
-					<li onclick="dong_select('17',this);">용산구</li>
-					<li onclick="dong_select('18',this);">동대문구</li>
-					<li onclick="dong_select('19',this);">강동구</li>
-					<li onclick="dong_select('20',this);">중랑구</li>
-					<li onclick="dong_select('21',this);">중구</li>
+				
+				{% if cate == '0' %}
+					<li class="on" onclick="cate_select('0',this,'{{subject}}');">분식</li>
+				{% else %}
+					<li onclick="cate_select('0',this,'{{subject}}');">분식</li>
+				{% endif %}
+				{% if cate == '1' %}
+					<li class="on" onclick="cate_select('1',this,'{{subject}}');">족발/보쌈</li>
+				{% else %}
+					<li onclick="cate_select('1',this,'{{subject}}');">족발/보쌈</li>
+				{% endif %}
+				{% if cate == '2' %}
+					<li class="on" onclick="cate_select('2',this,'{{subject}}');">치킨</li>
+				{% else %}
+					<li onclick="cate_select('2',this,'{{subject}}');">치킨</li>
+				{% endif %}
+				{% if cate == '3' %}
+					<li class="on"  onclick="cate_select('3',this,'{{subject}}');">패스트푸드</li>
+				{% else %}
+					<li onclick="cate_select('3',this,'{{subject}}');">패스트푸드</li>
+				{% endif %}
+				{% if cate == '4' %}
+					<li class="on" onclick="cate_select('4',this,'{{subject}}');">카페/디저트</li>
+				{% else %}
+					<li onclick="cate_select('4',this,'{{subject}}');">카페/디저트</li>
+				{% endif %}
+				{% if cate == '5' %}
+					<li class="on" onclick="cate_select('5',this,'{{subject}}');">돈까스/일식</li>
+				{% else %}
+					<li onclick="cate_select('5',this,'{{subject}}');">돈까스/일식</li>
+				{% endif %}
+				{% if cate == '6' %}
+					<li class="on" onclick="cate_select('6',this,'{{subject}}');">아시안/양식</li>
+				{% else %}
+					<li onclick="cate_select('6',this,'{{subject}}');">아시안/양식</li>
+				{% endif %}
+				{% if cate == '7' %}
+					<li class="on" onclick="cate_select('7',this,'{{subject}}');">한식</li>
+				{% else %}
+					<li onclick="cate_select('7',this,'{{subject}}');">한식</li>
+				{% endif %}
+				{% if cate == '8' %}
+					<li class="on" onclick="cate_select('8',this,'{{subject}}');">도시락</li>
+				{% else %}
+					<li onclick="cate_select('8',this,'{{subject}}');">도시락</li>
+				{% endif %}
+				{% if cate == '9' %}
+					<li class="on" onclick="cate_select('9',this,'{{subject}}');">배달전문업체</li>
+				{% else %}
+					<li onclick="cate_select('9',this,'{{subject}}');">배달전문업체</li>
+				{% endif %}
+				{% if cate == '10' %}
+					<li class="on" onclick="cate_select('10',this,'{{subject}}');">야식</li>
+				{% else %}
+					<li onclick="cate_select('10',this,'{{subject}}');">야식</li>
+				{% endif %}
+				{% if cate == '11' %}
+					<li class="on" onclick="cate_select('11',this,'{{subject}}');">중식</li>
+				{% else %}
+					<li onclick="cate_select('11',this,'{{subject}}');">중식</li>
+				{% endif %}
+				{% if cate == '12' %}
+					<li class="on" onclick="cate_select('12',this,'{{subject}}');">찜탕</li>
+				{% else %}
+					<li onclick="cate_select('12',this,'{{subject}}');">찜탕</li>
+				{% endif %}
+				{% if cate == '13' %}
+					<li class="on" onclick="cate_select('13',this,'{{subject}}');">피자</li>
+				{% else %}
+					<li onclick="cate_select('13',this,'{{subject}}');">피자</li>
+				{% endif %}
+				{% if cate == '14' %}
+					<li class="on" onclick="cate_select('14',this,'{{subject}}');">회</li>
+				{% else %}
+					<li onclick="cate_select('14',this,'{{subject}}');">회</li>
+				{% endif %}
+				{% if cate == '15' %}
+					<li class="on" onclick="cate_select('15',this,'{{subject}}');">심부름</li>
+				{% else %}
+					<li onclick="cate_select('15',this,'{{subject}}');">심부름</li>
+				{% endif %}
+					
 				</ul>
 			</div>
 			<div class="table_wrap">
@@ -111,7 +154,7 @@
 							<tr>
 								<th>날짜</th>
 								<th>시간</th>
-								<th>추가</th>
+								<th>업종</th>
 								<th>작년주문량</th>
 								<th>예상 주문량</th>
 							</tr>
@@ -119,7 +162,56 @@
 								<tr>
 									<td>{{n[0]}}</td>
 									<td>{{n[4]}}시</td>
-									<td>추가</td>
+									
+									{% if n[5] == '0' %}
+										<td>분식</td>
+									{% endif %}
+									{% if n[5]== '1' %}
+										<td>족발/보쌈</td>
+									{% endif %}
+									{% if n[5]== '2' %}
+										<td>치킨</td>
+									{% endif %}
+									{% if n[5]== '3' %}
+										<td>패스트푸드</td>
+									{% endif %}
+									{% if n[5]== '4' %}
+										<td>카페/디저트</td>
+									{% endif %}
+									{% if n[5]== '5' %}
+										<td>돈까스/일식</td>
+									{% endif %}
+									{% if n[5]== '6' %}
+										<td>아시안/양식</td>
+									{% endif %}
+									{% if n[5]== '7' %}
+										<td>한식</td>
+									{% endif %}
+									{% if n[5]== '8' %}
+										<td>도시락</td>
+									{% endif %}
+									{% if n[5]== '9' %}
+										<td>배달전문업체</td>
+									{% endif %}
+									{% if n[5]== '10' %}
+										<td>야식</td>
+									{% endif %}
+									{% if n[5]== '11' %}
+										<td>중식</td>
+									{% endif %}
+									{% if n[5]== '12' %}
+										<td>찜탕</td>
+									{% endif %}
+									{% if n[5]== '13' %}
+										<td>피자</td>
+									{% endif %}
+									{% if n[5]== '14' %}
+										<td>회</td>
+									{% endif %}
+									{% if n[5]== '15' %}
+										<td>심부름</td>
+									{% endif %}
+
 									<td>{{n[7]}}건</td>
 									<td>{{n[7]}}건</td>
 								</tr>

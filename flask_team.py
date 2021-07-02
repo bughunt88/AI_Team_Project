@@ -28,6 +28,8 @@ def home():
 
 def view():
     name = request.args.get("name")
+    cate = str(request.args.get("cate"))
+
     
     #x_pred = load_data("SELECT d.date,YEAR,MONTH, d.day, d.time, category, dong,temperature,rain,wind,humidity, IFNULL( c_person,0) AS person, VALUE FROM main_data_table AS d INNER JOIN `weather` AS s ON d.date = s.DATE AND d.time = s.time LEFT JOIN `covid19_re` AS c ON c.date = d.date ", is_train = False)
     #x_train, y_train = load_data("SELECT d.date,YEAR,MONTH, d.day, d.time, category, dong,temperature,rain,wind,humidity, IFNULL( c_person,0) AS person, VALUE FROM main_data_table AS d INNER JOIN `weather` AS s ON d.date = s.DATE AND d.time = s.time LEFT JOIN `covid19_re` AS c ON c.date = d.date WHERE (d.TIME != 2 AND d.TIME != 3 AND d.TIME != 4 AND d.TIME != 5  AND d.TIME != 6 AND d.TIME != 7 AND d.TIME != 8) ORDER BY DATE, YEAR, MONTH, DAY, TIME, category, dong ASC")
@@ -78,16 +80,25 @@ def view():
         location += "20"
     elif name =='중구':
         location += "21"
+    else:
+        location += "22"
 
     location += "'"
 
-    sql = "SELECT date,YEAR,MONTH,day,time,category,dong,value, IFNULL((SELECT VALUE FROM main_data_table AS s WHERE  s.date = DATE_SUB(a.date, INTERVAL 1 YEAR) AND a.month=s.month AND a.time=s.time AND a.category=s.category AND a.dong = s.dong ),0) AS l_value from result_data_table as a where 1"+location
+    cate_list = ""
+
+    if cate != "None":
+        cate_list += " and category = '" + cate + "' "
+
+    sql = "SELECT date,YEAR,MONTH,day,time,category,dong,value, IFNULL((SELECT VALUE FROM main_data_table AS s WHERE  s.date = DATE_SUB(a.date, INTERVAL 1 YEAR) AND a.month=s.month AND a.time=s.time AND a.category=s.category AND a.dong = s.dong ),0) AS l_value from result_data_table as a where 1"+location + cate_list
     sql += " order by a.date, a.year, a.month, a.day, a.time asc"
     print(sql)
     x_pred = load_data(sql)
     print(x_pred)
 
-    return render_template("table.html", subject = name, data = x_pred)
+    return render_template("table.html", subject = name, data = x_pred, cate = cate)
  
 if __name__=='__main__':
- app.run(host='0.0.0.0', port=5000, debug=True)
+ #app.run(host='0.0.0.0', port=5000, debug=True)
+ app.run()
+
