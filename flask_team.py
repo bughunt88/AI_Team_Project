@@ -12,11 +12,6 @@ def load_data(query, is_train = True):
 
 
 app = Flask(__name__)
-
-if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
-
-
  
 @app.route('/')
 
@@ -89,6 +84,5 @@ def view():
 
     return render_template("table.html", subject = name, data = x_pred)
  
-if __name__ == '__main__':
-    
-    app.run()
+if __name__=='__main__':
+ app.run(host='0.0.0.0', port=5000, debug=True)
