@@ -10,7 +10,13 @@ def load_data(query, is_train = True):
 
     return dataset
 
+
 app = Flask(__name__)
+
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0')
+
+
  
 @app.route('/')
 
