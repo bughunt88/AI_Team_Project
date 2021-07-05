@@ -18,7 +18,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-	
+
+	$(window).on("load", function() {
+			$(".loading_wrap").css('display', 'none');
+	});
+
 	function main_onclick(ths, obj){
 
 			$("#"+obj).removeClass("on");
@@ -34,8 +38,9 @@
 		//window.location = 'http://www.example.com/question';
 
 		var newURL = window.location.protocol + "//" + window.location.host 
-
+		$(".loading_wrap").css('display', 'block');
 		window.location = newURL + "/view?name=" + sbj + "&cate=" +obj
+
 
 	}	
 
@@ -44,7 +49,7 @@
    <title>서울시 배달 예측량</title>
  </head>
  <body>
-  
+
 	 <div class="content_wrap">
 	
 		<h2><p>서울시 {{subject}} 배달 예측량</p></h2>
@@ -227,6 +232,10 @@
 			</div>
 		</div>
 	</div>
-  
+	<div class="loading_wrap">
+		<div class="loading">
+			<img src="../static/img/loading.gif" alt="">
+		</div>      
+	</div>
  </body>
 </html>
