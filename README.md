@@ -4,5 +4,5 @@
 
 발표 영상 : https://www.youtube.com/watch?v=0UjDhMnMlkA
 
-결과 주소 : http://13.124.56.93:5000/
+결과 주소 : http://13.124.56.93:5000/ (서버 다운)
 
